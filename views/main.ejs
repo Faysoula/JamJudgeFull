@@ -198,6 +198,11 @@
         <div class="search-button">
           <a href="/api/album/searchalbum" class="btn btn-primary">Search</a>
         </div>
+        <% if (isArtist) { %>
+        <div class="upload-album-button">
+          <a href="/uploadalbum" class="btn btn-secondary">Upload Album</a>
+        </div>
+        <% } %>
         <div class="sign-out-button">
           <a href="/signout" class="btn btn-secondary">Sign Out</a>
         </div>

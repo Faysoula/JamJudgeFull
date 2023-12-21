@@ -73,6 +73,7 @@ const insertUserController = async (req, res) => {
       user: {
         id: response.user_id,
         username: response.user_username,
+        isArtist: response.isartist,
       },
     };
 
@@ -185,6 +186,7 @@ const loginUserController = async (req, res) => {
       user: {
         id: user.user_id,
         username: user.user_username,
+        isArtist: user.isartist,
       },
     };
 

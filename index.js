@@ -74,10 +74,13 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/JamJudge", authenticateUser, (req, res) => {
-  const username = req.user ? req.user.username : ''; 
+  const username = req.user ? req.user.username : "";
+  const isArtistc = req.user && req.user.isArtist; // Check if user is an artist
+
   res.render("main", {
-    isLoggedIn: req.user ? true : false,
-    user_username: username, // Pass the username to the template
+    isLoggedIn: !!req.user,
+    user_username: username,
+    isArtist: isArtistc, // Pass this to your EJS template
   });
 });
 

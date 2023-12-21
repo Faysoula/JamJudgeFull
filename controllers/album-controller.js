@@ -91,6 +91,7 @@ const insertAlbumcontroller = async (req, res) => {
         albumId: response.album_id, // Assuming response contains album_id
         albumCoverUrl: `/images/${album_cover.name}`,
       });
+      
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

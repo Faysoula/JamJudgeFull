@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create an Account</title>
+    <link rel="icon" type="image/x-icon" href="/images/FAVICON.ico">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: url("images/wallpaper.png");
+      }
+      .card {
+        color: #5f13ca;
+        position: relative;
+        z-index: 1;
+        background: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+      }
+      .card {
+        width: 500px; /* Set the width of the form box */
+        min-height: 640.07px; /* Set the height of the form box */
+      }
+
+      .container {
+        max-width: 750px;
+        margin-top: 20px;
+      }
+
+      .card:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: -16px;
+        right: -16px;
+        bottom: -16px;
+        left: -16px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+      }
+      .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .form-check-label {
+        display: block;
+      }
+      .btn-purple {
+        background-color: #7c5c7e; /* Or the specific color you want */
+        border: none;
+        border-radius: 20px; /* Adjust as needed to match the desired roundness */
+        color: white;
+        padding: 10px 25px; /* Adjust the padding to increase or decrease button size */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow effect */
+        font-size: 16px; /* Adjust the font size as needed */
+        text-align: center;
+        display: inline-block;
+        width: 100%; /* This will make the button expand to the full width of its parent container */
+        -webkit-transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-purple:hover,
+      .btn-purple:focus {
+        background-color: #6a4f6b; /* Slightly darker shade for hover/focus */
+        color: white; /* Keep text color the same */
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container d-flex align-items-center justify-content-center h-100"
+    >
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Create an account</h3>
+          <p>Already have an account? <a href="login">Log In</a></p>
+          <form action="/api/users/signup" method="post">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="user_firstname"
+                placeholder="First Name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="user_lastname"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="user_username"
+                placeholder="What should we call you?"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="email"
+                class="form-control"
+                name="user_email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="date"
+                class="form-control"
+                name="user_dob"
+                placeholder="When do we celebrate?"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="password"
+                class="form-control"
+                name="user_pass"
+                placeholder="Password"
+                required
+              />
+            </div>
+              <div class="mb-3">
+    <label for="isArtist" class="form-label">Are you an artist?</label>
+    <select class="form-select" name="isartist" id="isArtist" required>
+      <option value="">Select...</option>
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+
+  <!-- initially hidden -->
+  <div id="artistDetails" style="display: none;">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="artist_alias" id="artistAlias" placeholder="What'd you go by?">
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="artist_genre" id="artistGenre" placeholder="Artist Genre">
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" name="artist_about" id="artistAbout" placeholder="Tell us a bit about yourself  c: "></textarea>
+    </div>
+  </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-purple">Start Judging</button>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const artistSelect = document.getElementById('isArtist');
+    const artistDetails = document.getElementById('artistDetails');
+
+    artistSelect.addEventListener('change', function() {
+      // Show the artist details if 'Yes' is selected
+      artistDetails.style.display = this.value === '1' ? 'block' : 'none';
+    });
+  });
+</script>

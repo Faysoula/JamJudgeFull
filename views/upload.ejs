@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Album</title>
+    <link rel="icon" type="image/x-icon" href="/images/FAVICON.ico" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: url("images/album.png");
+        font-family: "Arial", sans-serif;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        background: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+      }
+      .btn-custom {
+        background-color: #7c5c7e;
+        color: white;
+        border-radius: 20px;
+        padding: 10px 25px;
+        border: none;
+        width: 100%;
+      }
+      .btn-custom:hover {
+        background-color: #6a4f6b;
+      }
+      .preview-box {
+        height: 300px; /* Adjust as needed */
+        background-color: #f3f3f3; /* Light gray background for the preview box */
+        border-radius: 5px;
+        text-align: center;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .preview-box img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+      }
+
+      .info-box {
+        margin-top: 10px;
+        border: 2px solid #7c5c7e;
+        padding: 10px;
+        background-color: white;
+        text-align: left;
+      }
+
+      .cover-placeholder {
+        height: 200px;
+        width: 200px;
+        border: 2px dashed #7c5c7e;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px auto;
+        background-color: #f3f3f3;
+        color: #7c5c7e;
+        font-size: 14px;
+        text-align: center;
+        position: relative;
+      }
+
+      .cover-placeholder img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* This will ensure the image covers the area without losing its aspect ratio */
+        border-radius: 5px; /* Optional, for rounded corners */
+      }
+
+      /* Adjust the preview box to accommodate new elements */
+      .preview-box {
+        min-height: 500px;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 30px;
+      }
+
+      /* Additional styles */
+      label {
+        color: #000; /* Color of text in the form */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="preview-box" id="previewBox">
+            <div class="cover-placeholder">Album cover will appear here...</div>
+            <div id="albumDetails" class="info-box"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h3 class="card-title">Upload Album</h3>
+            <form id="albumForm" enctype="multipart/form-data">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="album_name"
+                  name="album_name"
+                  placeholder="Album Name"
+                  required
+                  oninput="updateDetails()"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="album_cover"
+                  name="album_cover"
+                  required
+                  onchange="previewImage(event)"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="album_date"
+                  name="album_date"
+                  required
+                  oninput="updateDetails()"
+                />
+              </div>
+              <div class="d-grid gap-2">
+                <button
+                  type="button"
+                  class="btn btn-custom"
+                  onclick="uploadAlbum()"
+                >
+                  Upload Album
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function previewImage(event) {
+        let reader = new FileReader();
+        reader.onload = function () {
+          let coverPlaceholder = document.querySelector(".cover-placeholder");
+          if (coverPlaceholder) {
+            coverPlaceholder.innerHTML = '<img src="' + reader.result + '" />';
+          } else {
+            // If cover-placeholder does not exist, create it
+            let previewBox = document.getElementById("previewBox");
+            let newCoverPlaceholder = document.createElement("div");
+            newCoverPlaceholder.className = "cover-placeholder";
+            newCoverPlaceholder.innerHTML =
+              '<img src="' + reader.result + '" />';
+            previewBox.insertBefore(newCoverPlaceholder, previewBox.firstChild); // Insert at the beginning
+          }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function updateDetails() {
+        let albumName = document.getElementById("album_name").value;
+        let albumDate = document.getElementById("album_date").value;
+        let albumDetails = document.getElementById("albumDetails");
+
+        albumDetails.innerHTML = albumName
+          ? "<strong>Name:</strong> " + albumName + "<br>"
+          : "";
+        albumDetails.innerHTML += albumDate
+          ? "<strong>Release Date:</strong> " + albumDate
+          : "";
+      }
+
+      function uploadAlbum() {
+        var formData = new FormData(document.getElementById("albumForm"));
+
+        fetch("/api/album/insertalbum", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "Network response was not ok " + response.statusText
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Album uploaded successfully:", data);
+            alert("Album uploaded successfully!");
+          })
+          .catch((error) => {
+            console.error("Error uploading album:", error);
+            alert("Error uploading album. Please try again.");
+          });
+      }
+    </script>
+  </body>
+</html>

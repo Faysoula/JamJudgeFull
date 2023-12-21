@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/images/FAVICON.ico" />
+    <title>Jam Judge</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #312244;
+        color: white;
+        text-align: center;
+        /* Removed padding-top to allow auth-box to center vertically */
+      }
+
+      .logo {
+        margin-bottom: 50px;
+      }
+
+      .auth-box {
+        background-color: #4b0082; /* Dark purple background */
+        border: 2px solid white;
+        border-radius: 15px; /* Rounded corners */
+        padding: 20px;
+        position: fixed;
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Adjust horizontal and vertical alignment */
+        z-index: 10; /* To ensure it's above the images */
+      }
+
+      .auth-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .auth-button {
+        margin: 0 10px;
+        background-color: #6a0dad; /* Purple background */
+        color: white; /* White text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px 20px; /* Padding inside the buttons */
+        text-transform: uppercase; /* Optional: makes the button text uppercase */
+        font-weight: bold; /* Optional: makes the button text bold */
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+      }
+
+      /* Hover effect for buttons */
+      .auth-button:hover {
+        background-color: #7b68ee; /* Slightly lighter purple */
+        color: white;
+      }
+
+      /* ... existing styles ... */
+
+      .image-conveyor {
+        display: flex;
+        position: fixed;
+        left: 0;
+        overflow: hidden;
+        width: 4086px; /* Twice the total width of all images in a row */
+      }
+
+      .image-conveyor img {
+        height: 227px;
+        width: 227px;
+      }
+
+      /* Animation for moving to the left */
+      @keyframes moveImagesLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(
+            -2043px
+          ); /* Move by the total width of images in a row */
+        }
+      }
+
+      /* Apply the same animation to all conveyors */
+      .image-conveyor {
+        animation: moveImagesLeft 20s linear infinite;
+      }
+
+      /* Positioning for each conveyor */
+      .image-conveyor:nth-of-type(1) {
+        top: 0;
+      }
+
+      .image-conveyor:nth-of-type(2) {
+        bottom: 33.5%; /* Adjust based on your layout */
+      }
+
+      .image-conveyor:nth-of-type(3) {
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- first level -->
+    <div class="image-conveyor">
+      <img src="/images/Blonde_-_Frank_Ocean.jpeg" alt="Image 1" />
+      <img
+        src="/images/Kendrick_Lamar_-_Mr._Morale_&_the_Big_Steppers.png"
+        alt="Image 2"
+      />
+      <img src="/images/The_Strokes_-_The_New_Abnormal.png" alt="Image 3" />
+      <img src="/images/Blonde_-_Frank_Ocean.jpeg" alt="Image 1" />
+      <img
+        src="/images/Kendrick_Lamar_-_Mr._Morale_&_the_Big_Steppers.png"
+        alt="Image 2"
+      />
+      <img src="/images/The_Strokes_-_The_New_Abnormal.png" alt="Image 3" />
+      <img src="/images/Blonde_-_Frank_Ocean.jpeg" alt="Image 1" />
+      <img
+        src="/images/Kendrick_Lamar_-_Mr._Morale_&_the_Big_Steppers.png"
+        alt="Image 2"
+      />
+      <img src="/images/The_Strokes_-_The_New_Abnormal.png" alt="Image 3" />
+
+      <img src="/images/Blonde_-_Frank_Ocean.jpeg" alt="Image 1" />
+      <img
+        src="/images/Kendrick_Lamar_-_Mr._Morale_&_the_Big_Steppers.png"
+        alt="Image 2"
+      />
+      <img src="/images/The_Strokes_-_The_New_Abnormal.png" alt="Image 3" />
+
+      <img src="/images/Blonde_-_Frank_Ocean.jpeg" alt="Image 1" />
+      <img
+        src="/images/Kendrick_Lamar_-_Mr._Morale_&_the_Big_Steppers.png"
+        alt="Image 2"
+      />
+      <img src="/images/The_Strokes_-_The_New_Abnormal.png" alt="Image 3" />
+
+      <!-- More images can be added here -->
+    </div>
+    <!-- middle level -->
+    <div class="image-conveyor">
+      <img src="/images/Tame_Impala_-_Currents.png" alt="Image 1" />
+      <img src="/images/saba.jpg" alt="Image 2" />
+      <img src="/images/Mac_Miller_-_Swimming.png" alt="Image 3" />
+      <img src="/images/Tame_Impala_-_Currents.png" alt="Image 1" />
+      <img src="/images/saba.jpg" alt="Image 2" />
+      <img src="/images/Mac_Miller_-_Swimming.png" alt="Image 3" />
+      <img src="/images/Tame_Impala_-_Currents.png" alt="Image 1" />
+      <img src="/images/saba.jpg" alt="Image 2" />
+      <img src="/images/Mac_Miller_-_Swimming.png" alt="Image 3" />
+      <img src="/images/Tame_Impala_-_Currents.png" alt="Image 1" />
+      <img src="/images/saba.jpg" alt="Image 2" />
+      <img src="/images/Mac_Miller_-_Swimming.png" alt="Image 3" />
+      <img src="/images/Tame_Impala_-_Currents.png" alt="Image 1" />
+      <img src="/images/saba.jpg" alt="Image 2" />
+      <img src="/images/Mac_Miller_-_Swimming.png" alt="Image 3" />
+
+      <!-- More images can be added here -->
+    </div>
+    <!-- last level -->
+    <div class="image-conveyor">
+      <img src="/images/91oMFeGdQsL.jpg" alt="Image 1" />
+      <img src="/images/Channel_ORANGE.jpg" alt="Image 2" />
+      <img src="/images/Damn.-Kendrick_Lamar.jpg" alt="Image 3" />
+      <img src="/images/91oMFeGdQsL.jpg" alt="Image 1" />
+      <img src="/images/Channel_ORANGE.jpg" alt="Image 2" />
+      <img src="/images/Damn.-Kendrick_Lamar.jpg" alt="Image 3" />
+      <img src="/images/91oMFeGdQsL.jpg" alt="Image 1" />
+      <img src="/images/Channel_ORANGE.jpg" alt="Image 2" />
+      <img src="/images/Damn.-Kendrick_Lamar.jpg" alt="Image 3" />
+      <img src="/images/91oMFeGdQsL.jpg" alt="Image 1" />
+      <img src="/images/Channel_ORANGE.jpg" alt="Image 2" />
+      <img src="/images/Damn.-Kendrick_Lamar.jpg" alt="Image 3" />
+      <img src="/images/91oMFeGdQsL.jpg" alt="Image 1" />
+      <img src="/images/Channel_ORANGE.jpg" alt="Image 2" />
+      <img src="/images/Damn.-Kendrick_Lamar.jpg" alt="Image 3" />
+
+      <!-- More images can be added here -->
+    </div>
+    <div class="auth-box">
+      <div class="container">
+        <div class="logo">
+          <img src="/images/Group 1.png" alt="Jam Judge Logo" />
+          <img src="/images/Jam Judge.png" alt="Jam Judge" />
+        </div>
+        <% if (isLoggedIn) { %>
+        <!-- If user is logged in, show search button -->
+        <div class="search-button">
+          <a href="/api/album/searchalbum" class="btn btn-primary">Search</a>
+        </div>
+        <div class="sign-out-button">
+          <a href="/signout" class="btn btn-secondary">Sign Out</a>
+        </div>
+        <% } else { %>
+        <!-- If user is not logged in, show sign in and sign up options -->
+        <div class="auth-buttons">
+          <a href="login" class="btn btn-primary auth-button">Sign In</a>
+          <a href="/register" class="btn btn-secondary auth-button">Sign Up</a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

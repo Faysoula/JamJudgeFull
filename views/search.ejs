@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album Search - Jam Judge</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #312244; /* Dark purple background */
+        color: white;
+        text-align: center;
+      }
+      .navbar-custom {
+        background-color: #6a42d8; /* Darker purple for navbar */
+        padding: 10px 0;
+      }
+      .search-container {
+        background-color: #6a42d8; /* Lighter purple */
+        padding: 20px;
+        border-radius: 10px; /* Rounded edges */
+        margin: 50px auto 30px; /* Centered with top margin */
+        max-width: 600px; /* Limit the width */
+      }
+      .album-cover {
+        max-width: 100%; /* Limit the image width to 100% of its container */
+        height: auto;
+        border-radius: 5px;
+      }
+      .card {
+        background-color: #6a42d8; /* Lighter purple */
+        margin: auto; /* Center the card */
+        max-width: 90%; /* Limit the card width */
+      }
+      .card-body {
+        padding: 10px; /* Reduced padding */
+      }
+      .btn-search {
+        background-color: #4e1a7f; /* Dark purple button */
+        border: none;
+        border-radius: 5px;
+      }
+      .btn-search:hover {
+        background-color: #391564; /* Slightly darker on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-custom">
+      <!-- Placeholder for the logo -->
+      <a class="navbar-brand" href="/JamJudge">
+        <img src="/images/Group 1.png" alt="Jam Judge Logo" />
+        <img src="/images/Jam Judge.png" alt="Jam Judge" />
+      </a>
+    </nav>
+
+    <div class="container mt-5">
+      <!-- Search form -->
+      <div class="search-container">
+        <form
+          class="form-inline mb-4 justify-content-center"
+          action="/api/album/searchalbum"
+          method="get"
+        >
+          <!-- Make sure the action URL is correct -->
+          <input
+            type="text"
+            class="form-control search-input"
+            name="album_name"
+            placeholder="Search..."
+            required
+          />
+          <button type="submit" class="btn btn-search">SEARCH</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Albums display section -->
+    <% if (albums && albums.length > 0) { %>
+    <div class="row justify-content-center">
+      <% albums.forEach(album => { %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img
+            src="<%= album.album_cover %>"
+            class="card-img-top album-cover"
+            alt="<%= album.album_name %>"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= album.album_name %></h5>
+            <p class="card-text">
+              <%= new Date(album.album_date).toDateString() %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <p class="text-center">No albums found. Try another search.</p>
+    <% } %>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

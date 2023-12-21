@@ -72,6 +72,7 @@ const insertUserController = async (req, res) => {
     const payload = {
       user: {
         id: response.user_id,
+        username: response.user_username,
       },
     };
 
@@ -89,7 +90,7 @@ const insertUserController = async (req, res) => {
           maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour)
         });
 
-        res.status(200).json({ message: "signup successful !!" });
+        res.redirect("/login");
       }
     );
   } catch (error) {
@@ -183,6 +184,7 @@ const loginUserController = async (req, res) => {
     const payload = {
       user: {
         id: user.user_id,
+        username: user.user_username,
       },
     };
 

@@ -4,7 +4,7 @@ const moment = require("moment");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { authenticateUser } = require("./helper")
+const { authenticateUser } = require("./helper");
 require("dotenv").config();
 
 const mysql = require("mysql2");
@@ -74,14 +74,18 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/JamJudge", authenticateUser, (req, res) => {
-  res.render("main", { isLoggedIn: req.user ? true : false });
+  const username = req.user ? req.user.username : ''; 
+  res.render("main", {
+    isLoggedIn: req.user ? true : false,
+    user_username: username, // Pass the username to the template
+  });
 });
+
 
 app.get("/signout", (req, res) => {
   res.clearCookie("token"); // Clear the authentication token cookie
   res.redirect("/JamJudge"); // Redirect to the main page or login page
 });
-
 
 // Start the server on the specified port
 app.listen(port, () => {

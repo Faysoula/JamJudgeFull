@@ -4,7 +4,7 @@ const { checkIfIdExists } = require("../helper");
 
 /**
  * Retrieves all album ratings from the database.
- * 
+ *
  * @returns {Promise<Array>} An array of album ratings.
  */
 const getRatingforalbum = async () => {
@@ -19,7 +19,7 @@ const getRatingforalbum = async () => {
 
 /**
  * Retrieves a specific album rating by its ID.
- * 
+ *
  * @param {number} rating_id The ID of the rating to retrieve.
  * @returns {Promise<Object>} The requested rating object.
  */
@@ -43,7 +43,7 @@ const getRatingforalbumId = async (rating_id) => {
 
 /**
  * Inserts a new album rating into the database.
- * 
+ *
  * @param {string} Rating_title The title of the rating.
  * @param {Date|string} Rating_date The date of the rating.
  * @param {number} user_id The ID of the user who is making the rating.
@@ -93,7 +93,7 @@ const insertRatingforalbum = async (
 
 /**
  * Updates an existing album rating in the database.
- * 
+ *
  * @param {number} rating_id The ID of the rating to update.
  * @param {string} Rating_title The new title of the rating.
  * @param {Date|string} Rating_date The new date of the rating.
@@ -143,7 +143,7 @@ const updateRatingforalbum = async (
 
 /**
  * Deletes an album rating from the database.
- * 
+ *
  * @param {number} rating_id The ID of the rating to delete.
  * @returns {Promise<Object>} The result of the delete operation.
  */
@@ -156,6 +156,22 @@ const deleteRatingforalbum = async (rating_id) => {
     throw new Error(error);
   }
 };
+const getUserReviews = async (user_id) => {
+  try {
+    // SQL query to fetch reviews along with album details
+    const sql = `
+      SELECT r.*, a.album_name, a.album_cover
+FROM ratingforalbum r
+JOIN albums a ON r.album_id = a.album_id
+WHERE r.user_id = ?
+ORDER BY r.Rating_date DESC;`;
+
+    const reviews = await query(sql, [user_id]);
+    return reviews;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 module.exports = {
   getRatingforalbum,
@@ -163,4 +179,5 @@ module.exports = {
   insertRatingforalbum,
   updateRatingforalbum,
   deleteRatingforalbum,
+  getUserReviews,
 };

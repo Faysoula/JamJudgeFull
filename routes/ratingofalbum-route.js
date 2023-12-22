@@ -6,6 +6,7 @@ const {
   insertratingalbumcontroller,
   updateRatingforalbumcontroller,
   deleteratingController,
+  userReviewsController,
 } = require("../controllers/ratingforalbum-controller");
 
 const {
@@ -16,6 +17,7 @@ const {
 
 const router = express.Router();
 
+router.get("/myreviews", userReviewsController);
 router.get("/ratingforalbum", getRatingforalbumcontoller);
 router.get("/ratingforalbumid/:id", getRatingforalbumIdcontoller);
 router.post("/submitReview", insertratingalbumcontroller);

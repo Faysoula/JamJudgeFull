@@ -6,7 +6,31 @@ const {
   insertRatingforalbum,
   updateRatingforalbum,
   deleteRatingforalbum,
+  getUserReviews,
 } = require("../services/ratingforalbum-service");
+
+const userReviewsController = async (req, res) => {
+  try {
+    // Extract the user ID from the JWT token in the cookie
+    const token = req.cookies["token"];
+    if (!token) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user_id = decoded.user.id;
+
+    // Fetch the user's reviews
+    const reviews = await getUserReviews(user_id);
+
+    // Render the user reviews page with the fetched reviews
+    res.render("userReviews", { reviews });
+  } catch (error) {
+    console.error("Error fetching user reviews:", error);
+    res.status(500).send("Server error");
+  }
+};
+
 
 const getRatingforalbumcontoller = async (req, res) => {
   try {
@@ -117,4 +141,5 @@ module.exports = {
   insertratingalbumcontroller,
   updateRatingforalbumcontroller,
   deleteratingController,
+  userReviewsController,
 };

@@ -43,15 +43,23 @@
         background-color: #3b0944; /* Darker purple for navbar */
         padding: 10px 0;
       }
+      .search-btn {
+        background-color: #815aa1; /* Dark purple background */
+        color: white; /* White text for visibility */
+        border: none; /* No border */
+      }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-custom">
-      <!-- Placeholder for the logo -->
       <a class="navbar-brand" href="/JamJudge">
         <img src="/images/Group 1.png" alt="Jam Judge Logo" />
         <img src="/images/Jam Judge.png" alt="Jam Judge" />
       </a>
+
+      <div class="navbar-nav ml-auto">
+        <a href="/api/album/searchalbum" class="btn search-btn">Search</a>
+      </div>
     </nav>
     <div class="container">
       <div class="row">

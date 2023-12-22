@@ -87,7 +87,7 @@ const insertUserController = async (req, res) => {
         // Set token in a HttpOnly cookie
         res.cookie("token", token, {
           httpOnly: true, // The cookie cannot be accessed by client-side JS
-          secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+          secure: process.env.NODE_ENV === "production", 
           maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour)
         });
 
@@ -193,14 +193,14 @@ const loginUserController = async (req, res) => {
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }, // Token expiration time
+      { expiresIn: "1h" }, 
       (err, token) => {
         if (err) throw err;
 
-        // Set token in a HttpOnly cookie
+       
         res.cookie("token", token, {
-          httpOnly: true, // The cookie cannot be accessed by client-side JS
-          secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+          httpOnly: true, 
+          secure: process.env.NODE_ENV === "production", 
           maxAge: 3600000, //  (1 hour)
         });
 

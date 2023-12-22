@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Reviews</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+    <style>
+        body{
+            background: #560764;
+        }
+      .navbar-custom {
+        background-color: #3b0944; /* Darker purple for navbar */
+        padding: 10px 0;
+      }
+      .search-btn {
+        background-color: #815aa1; /* Dark purple background */
+        color: white; /* White text for visibility */
+        border: none; /* No border */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-custom">
+      <a class="navbar-brand" href="/JamJudge">
+        <img src="/images/Group 1.png" alt="Jam Judge Logo" />
+        <img src="/images/Jam Judge.png" alt="Jam Judge" />
+        <div class="navbar-nav ml-auto">
+          <a href="/api/album/searchalbum" class="btn search-btn">Search</a>
+        </div>
+      </a>
+    </nav>
+
+    <div class="container mt-4">
+      <h1>Your Reviews</h1>
+      <% if (reviews && reviews.length > 0) { %> <% reviews.forEach(review => {
+      %>
+      <div class="card mb-3">
+        <div class="card-header">
+          <strong>Album:</strong>
+          <a href="/api/album/album/<%= review.album_id %>">
+            <%= review.album_name %>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= review.Rating_title %></h5>
+          <p class="card-text"><%= review.Rating_body %></p>
+          <p class="card-text">
+            <small class="text-muted">
+              Reviewed on: <%= new Date(review.Rating_date).toLocaleDateString()
+              %>
+            </small>
+          </p>
+          <!-- Optionally add Edit/Delete buttons here -->
+        </div>
+      </div>
+      <% }); %> <% } else { %>
+      <p>You haven't written any reviews yet.</p>
+      <% } %>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <!-- Add any additional scripts here -->
+  </body>
+</html>

@@ -26,7 +26,6 @@ const getAlbumByName = async (albumName) => {
   }
 };
 
-
 /**
  * Retrieves a specific album from the database based on its ID.
  *
@@ -111,6 +110,26 @@ const deleteAlbum = async (album_id) => {
   }
 };
 
+const getAlbumDetailsAndReviews = async (album_id) => {
+  try {
+    const albumDetails = await query(
+      `SELECT * FROM albums WHERE album_id = ?`,
+      [album_id]
+    );
+    const albumReviews = await query(
+      `SELECT r.rating_id, r.Rating_title, r.Rating_date, r.Rating_body, u.user_username 
+       FROM ratingforalbum r
+       INNER JOIN users u ON r.user_id = u.user_id
+       WHERE r.album_id = ?
+       ORDER BY r.Rating_date DESC`,
+      [album_id]
+    );
+    return { details: albumDetails[0], reviews: albumReviews };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 module.exports = {
   getAlbums,
   getAlbumByName,
@@ -118,4 +137,5 @@ module.exports = {
   insertAlbum,
   updateAlbum,
   deleteAlbum,
+  getAlbumDetailsAndReviews,
 };

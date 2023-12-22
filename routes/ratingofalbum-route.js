@@ -18,11 +18,7 @@ const router = express.Router();
 
 router.get("/ratingforalbum", getRatingforalbumcontoller);
 router.get("/ratingforalbumid/:id", getRatingforalbumIdcontoller);
-router.post(
-  "/insertalbumrating",
-  insertAlbumratingvalidtion,
-  insertratingalbumcontroller,
-);
+router.post("/ratingforalbum", insertratingalbumcontroller);
 router.put(
   "/updateratingalbum",
   updateAlbumratingvalidtion,

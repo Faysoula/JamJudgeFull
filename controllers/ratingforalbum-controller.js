@@ -28,26 +28,21 @@ const getRatingforalbumIdcontoller = async (req, res) => {
 };
 
 const insertratingalbumcontroller = async (req, res) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { Rating_title, Rating_date, user_id, album_id, Rating_body } =
-    req.body;
+  const { Rating_title, album_id, Rating_body } = req.body;
+  const user_id = req.session.user_id; 
 
   try {
-    const response = await insertRatingforalbum(
+    const Rating_date = new Date(); // Current date for the review
+    const newReview = await insertRatingforalbum(
       Rating_title,
       Rating_date,
       user_id,
       album_id,
       Rating_body
     );
-    res.status(201).json({ response });
+    res.redirect(`/album/${album_id}`); // Redirect to the album page to show the new review
   } catch (error) {
-    res.status(500).json({ error: error?.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -99,6 +94,8 @@ const deleteratingController = async (req, res) => {
     res.status(500).json({ message: error?.message });
   }
 };
+
+
 
 module.exports = {
   getRatingforalbumcontoller,

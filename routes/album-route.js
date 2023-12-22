@@ -6,6 +6,7 @@ const {
   updateAlbumcontroller,
   deleteAlbumController,
   getalbumbynamecont,
+  getAlbumPageController,
 } = require("../controllers/album-controller");
 const {
   insertAlbumValid,
@@ -16,6 +17,7 @@ const {
 const router = express.Router();
 
 router.get("/allalbums", getAlbumsController);
+router.get("/album/:id", getAlbumPageController);
 router.get("/getalbumbyid/:id", getAlbumsbyIdcontroller);
 router.get("/searchalbum", getalbumbynamecont);
 router.post("/insertalbum", insertAlbumValid, insertAlbumcontroller);

@@ -10,20 +10,20 @@
     />
     <style>
       body {
-        background-color: #312244; /* Dark purple background */
+        background-color: #560764; /* Dark purple background */
         color: white;
         text-align: center;
       }
       .navbar-custom {
-        background-color: #6a42d8; /* Darker purple for navbar */
+        background-color: #3b0944; /* Darker purple for navbar */
         padding: 10px 0;
       }
       .search-container {
-        background-color: #6a42d8; /* Lighter purple */
-        padding: 20px;
+        background-color: #3b0944; /* Lighter purple */
+        padding: 10px;
         border-radius: 10px; /* Rounded edges */
-        margin: 50px auto 30px; /* Centered with top margin */
-        max-width: 600px; /* Limit the width */
+        margin: 20px auto 30px; /* Centered with top margin */
+        max-width: 450px; /* Limit the width */
       }
       .album-cover {
         max-width: 100%; /* Limit the image width to 100% of its container */
@@ -31,7 +31,7 @@
         border-radius: 5px;
       }
       .card {
-        background-color: #6a42d8; /* Lighter purple */
+        background-color: #3b0944; /* Lighter purple */
         margin: auto; /* Center the card */
         max-width: 90%; /* Limit the card width */
       }
@@ -84,11 +84,14 @@
       <% albums.forEach(album => { %>
       <div class="col-md-4 mb-3">
         <div class="card">
-          <img
-            src="<%= album.album_cover %>"
-            class="card-img-top album-cover"
-            alt="<%= album.album_name %>"
-          />
+          <!-- Wrap the image with an anchor tag linking to the album's rating page -->
+          <a href="/api/album/album/<%= album.album_id %>">
+            <img
+              src="<%= album.album_cover %>"
+              class="card-img-top album-cover"
+              alt="<%= album.album_name %>"
+            />
+          </a>
           <div class="card-body">
             <h5 class="card-title"><%= album.album_name %></h5>
             <p class="card-text">

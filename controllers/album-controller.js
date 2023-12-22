@@ -7,9 +7,23 @@ const {
   updateAlbum,
   deleteAlbum,
   getAlbumByName,
+  getAlbumDetailsAndReviews,
 } = require("../services/album-service");
 
 const path = require("path");
+
+const getAlbumPageController = async (req, res) => {
+  try {
+    const album_id = req.params.id; // Get the album ID from the route parameter
+    const albumData = await getAlbumDetailsAndReviews(album_id);
+    res.render("albumrating", {
+      albumDetails: albumData.details,
+      reviews: albumData.reviews,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const getAlbumsController = async (req, res) => {
   try {
@@ -148,4 +162,5 @@ module.exports = {
   updateAlbumcontroller,
   deleteAlbumController,
   getalbumbynamecont,
+  getAlbumPageController,
 };

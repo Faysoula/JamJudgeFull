@@ -15,19 +15,19 @@
         background-size: cover;
       }
       .album-cover-container {
-        background-color: #7c5c7e;
+        background-color: #815aa1;
         padding: 20px;
         margin-bottom: 20px;
         border-radius: 5px;
       }
       .reviews-container {
-        background-color: #7c5c7e;
+        background-color: #815aa1;
         padding: 20px;
         border-radius: 5px;
       }
       .review {
         margin-bottom: 15px;
-        border-bottom: 1px solid #2fca08;
+        border-bottom: 1px solid #3b0944;
         padding-bottom: 15px;
       }
       .album-cover {
@@ -39,9 +39,20 @@
       .container {
         margin-top: 50px;
       }
+      .navbar-custom {
+        background-color: #3b0944; /* Darker purple for navbar */
+        padding: 10px 0;
+      }
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-custom">
+      <!-- Placeholder for the logo -->
+      <a class="navbar-brand" href="/JamJudge">
+        <img src="/images/Group 1.png" alt="Jam Judge Logo" />
+        <img src="/images/Jam Judge.png" alt="Jam Judge" />
+      </a>
+    </nav>
     <div class="container">
       <div class="row">
         <!-- Album details -->
@@ -76,6 +87,39 @@
               </p>
             </div>
             <% }); %>
+            <div class="submit-review-form">
+              <h5>Write a Review:</h5>
+              <form action="/api/ratingforalbum/submitReview" method="post">
+                <input
+                  type="hidden"
+                  name="album_id"
+                  value="<%= albumDetails.album_id %>"
+                />
+                <div class="form-group">
+                  <label for="reviewTitle">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="reviewTitle"
+                    name="Rating_title"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="reviewBody">Review</label>
+                  <textarea
+                    class="form-control"
+                    id="reviewBody"
+                    name="Rating_body"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Submit Review
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

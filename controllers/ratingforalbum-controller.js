@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator");
-
+const jwt = require("jsonwebtoken");
 const {
   getRatingforalbum,
   getRatingforalbumId,
@@ -29,22 +29,36 @@ const getRatingforalbumIdcontoller = async (req, res) => {
 
 const insertratingalbumcontroller = async (req, res) => {
   const { Rating_title, album_id, Rating_body } = req.body;
-  const user_id = req.session.user_id; 
 
   try {
+    // Decode the JWT token
+    const token = req.cookies["token"];
+    if (!token) {
+      return res.redirect("/login?error=notLoggedIn");
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user_id = decoded.user.id; // Extract the user_id
+
     const Rating_date = new Date(); // Current date for the review
-    const newReview = await insertRatingforalbum(
+    await insertRatingforalbum(
       Rating_title,
       Rating_date,
       user_id,
       album_id,
       Rating_body
     );
-    res.redirect(`/album/${album_id}`); // Redirect to the album page to show the new review
+
+    res.redirect(`/api/album/album/${album_id}`); // Redirect to the album page to show the new review
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (error.message.includes("does not exist")) {
+      res.redirect(`/api/album/album/${album_id}?error=userOrAlbumNotFound`);
+    } else {
+      res.status(500).json({ message: error.message });
+    }
   }
 };
+
 
 const updateRatingforalbumcontroller = async (req, res) => {
   const errors = validationResult(req);

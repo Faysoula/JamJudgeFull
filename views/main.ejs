@@ -104,6 +104,24 @@
       .image-conveyor:nth-of-type(3) {
         bottom: 0;
       }
+      .auth-button, .search-button a, .upload-album-button a, .sign-out-button a {
+            background-color: #815aa1; /* Purple background */
+            color: white; /* White text */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding inside the buttons */
+            margin: 10px; /* Space between buttons */
+            text-transform: uppercase; /* Optional: makes the button text uppercase */
+            font-weight: bold; /* Optional: makes the button text bold */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            text-decoration: none; /* Remove underline from links */
+            display: inline-block; /* Align items in line */
+        }
+
+        /* Hover effect for buttons */
+        .auth-button:hover, .search-button a:hover, .upload-album-button a:hover, .sign-out-button a:hover {
+            background-color: #9572b8; /* Slightly lighter purple */
+        }
     </style>
   </head>
   <body>

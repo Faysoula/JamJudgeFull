@@ -102,7 +102,7 @@ const insertAlbumcontroller = async (req, res) => {
       console.log(uploadPath);
       res.status(201).json({
         message: "Album uploaded successfully",
-        albumId: response.album_id, // Assuming response contains album_id
+        albumId: response.album_id, //response contains album_id
         albumCoverUrl: `/images/${album_cover.name}`,
       });
       

@@ -36,7 +36,7 @@
         max-width: 90%; /* Limit the card width */
       }
       .card-body {
-        padding: 10px; /* Reduced padding */
+        padding: 10px; 
       }
       .btn-search {
         background-color: #4e1a7f; /* Dark purple button */
@@ -50,7 +50,6 @@
   </head>
   <body>
     <nav class="navbar navbar-custom">
-      <!-- Placeholder for the logo -->
       <a class="navbar-brand" href="/JamJudge">
         <img src="/images/Group 1.png" alt="Jam Judge Logo" />
         <img src="/images/Jam Judge.png" alt="Jam Judge" />
@@ -58,14 +57,12 @@
     </nav>
 
     <div class="container mt-5">
-      <!-- Search form -->
       <div class="search-container">
         <form
           class="form-inline mb-4 justify-content-center"
           action="/api/album/searchalbum"
           method="get"
         >
-          <!-- Make sure the action URL is correct -->
           <input
             type="text"
             class="form-control search-input"
@@ -84,7 +81,6 @@
       <% albums.forEach(album => { %>
       <div class="col-md-4 mb-3">
         <div class="card">
-          <!-- Wrap the image with an anchor tag linking to the album's rating page -->
           <a href="/api/album/album/<%= album.album_id %>">
             <img
               src="<%= album.album_cover %>"
